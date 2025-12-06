@@ -2,16 +2,12 @@ package pro.fazeclan.river.stupid_express.mixin.neutral;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import dev.doctor4t.trainmurdermystery.cca.GameRoundEndComponent;
-import dev.doctor4t.trainmurdermystery.cca.GameWorldComponent;
-import dev.doctor4t.trainmurdermystery.client.gui.RoleAnnouncementTexts;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import pro.fazeclan.river.stupid_express.neutral.NeutralRoleWorldComponent;
 
@@ -23,18 +19,6 @@ public class NeutralRoundEndMixin {
     @Shadow
     @Final
     private Level world;
-
-    @ModifyArg(
-            method = "setRoundEndData",
-            at = @At(value = "INVOKE", target = "Ldev/doctor4t/trainmurdermystery/cca/GameRoundEndComponent$RoundEndData;<init>(Lcom/mojang/authlib/GameProfile;Ldev/doctor4t/trainmurdermystery/client/gui/RoleAnnouncementTexts$RoleAnnouncementText;Z)V")
-    )
-    private static RoleAnnouncementTexts.RoleAnnouncementText stupidexpress$setRoundEndData(
-            RoleAnnouncementTexts.RoleAnnouncementText value,
-            @Local(name = "game") GameWorldComponent game,
-            @Local(name = "player") ServerPlayer player
-    ) {
-        return value;
-    }
 
     @Inject(
             method = "didWin",
