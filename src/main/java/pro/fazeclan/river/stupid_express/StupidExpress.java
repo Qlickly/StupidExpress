@@ -126,6 +126,8 @@ public class StupidExpress implements ModInitializer {
 
         AvariciousGoldHandler.onGameStart();
 
+        /// LOVERS
+
         Harpymodloader.setRoleMaximum(LOVERS, 0); // fake role for things
 
         // mod stuff

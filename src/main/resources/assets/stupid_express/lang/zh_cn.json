@@ -1,7 +1,6 @@
 {
   "announcement.goals.amnesiac": "从尸体上偷取一个身份并扮演该角色！",
   "announcement.role.amnesiac": "间谍！",
-  "announcement.win.amnesiac": "间谍胜利！",
   "hud.amnesiac.select_body": "与其互动以偷取其身份！",
 
   "announcement.goals.arsonist": "将所有玩家浇湿后点燃以获胜！",
@@ -17,7 +16,6 @@
 
   "announcement.goals.necromancer": "复活死者，让他们为你效力！",
   "announcement.role.necromancer": "死灵法师！",
-  "announcement.win.necromancer": "死灵法师胜利！",
   "hud.necromancer.possible_revive": "与其互动可将此玩家复活为杀手！",
   "hud.necromancer.no_possible_revive": "在使用能力之前，你的同伴必须死亡！",
   "hud.necromancer.cooldown": "你必须等待 %ss 后才能尝试。",

@@ -25,7 +25,10 @@ public class LoversSelectionMixin {
     )
     private void assignLovers(ServerLevel serverWorld, GameWorldComponent gameWorldComponent, List<ServerPlayer> players, CallbackInfo ci) {
 
-        if (HarpyModLoaderConfig.HANDLER.instance().disabled.contains("lovers")) {
+        if (HarpyModLoaderConfig.HANDLER.instance().disabled.contains(StupidExpress.LOVERS.identifier().getPath())) {
+            return;
+        }
+        if (HarpyModLoaderConfig.HANDLER.instance().disabled.contains(StupidExpress.LOVERS.identifier().toString())) {
             return;
         }
 

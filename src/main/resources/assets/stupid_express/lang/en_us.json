@@ -1,7 +1,6 @@
 {
   "announcement.goals.amnesiac": "Steal a role from a body and act as that role!",
   "announcement.role.amnesiac": "Amnesiac!",
-  "announcement.win.amnesiac": "The Amnesiac Wins!",
   "hud.amnesiac.select_body": "Interact to steal the role!",
 
   "announcement.goals.arsonist": "Douse all players and ignite them to win!",
@@ -17,7 +16,6 @@
 
   "announcement.goals.necromancer": "Bring back the dead to have them do your bidding!",
   "announcement.role.necromancer": "Necromancer!",
-  "announcement.win.necromancer": "Necromancer Wins!",
   "hud.necromancer.possible_revive": "Interact to revive this player as a killer!",
   "hud.necromancer.no_possible_revive": "One of your killer cohorts must die before you revive!",
   "hud.necromancer.cooldown": "You must wait %ss before attempting this.",
@@ -31,5 +29,5 @@
   "hud.lovers.partner": "Partner",
   "hud.lovers.in_love": "In love with %s!",
   "hud.lovers.notification": "You are in love with someone on the train!",
-  "death_reason.stupid_express.broken_heart": " lost their lover."
+  "death_reason.stupid_express.broken_heart": "lost their lover."
 }
