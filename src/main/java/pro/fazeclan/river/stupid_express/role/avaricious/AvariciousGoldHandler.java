@@ -5,21 +5,28 @@ import dev.doctor4t.trainmurdermystery.cca.PlayerShopComponent;
 import dev.doctor4t.trainmurdermystery.game.GameConstants;
 import net.minecraft.world.entity.player.Player;
 import org.agmas.harpymodloader.events.ModdedRoleAssigned;
-import pro.fazeclan.river.stupid_express.StupidExpress;
+import pro.fazeclan.river.stupid_express.SERoles;
 
 public class AvariciousGoldHandler {
 
     public static int TIMER_TICKS = GameConstants.getInTicks(1,0);
 
-    public static double MAX_DISTANCE = 7;
+    public static double MAX_DISTANCE = 5.5;
+
+    public static int STARTING_BALANCE = 50;
+    public static int PAYOUT_PER_PLAYER = 30;
+
+    public static long gameStartTime = -1;
 
     public static void onGameStart() {
         ModdedRoleAssigned.EVENT.register(((player, role) -> {
 
-            if (role.equals(StupidExpress.AVARICIOUS)) {
+            if (role.equals(SERoles.AVARICIOUS)) {
                 PlayerShopComponent shop = PlayerShopComponent.KEY.get(player);
 
-                shop.reset();
+                shop.setBalance(STARTING_BALANCE);
+
+                gameStartTime = -1;
 
             }
 
@@ -30,7 +37,7 @@ public class AvariciousGoldHandler {
     public static void payout() {
         ModdedRoleAssigned.EVENT.register(((player, role) -> {
 
-            if (role.equals(StupidExpress.AVARICIOUS)) {
+            if (role.equals(SERoles.AVARICIOUS)) {
 
                 GameTimeComponent timeComponent = GameTimeComponent.KEY.get(player.level());
                 boolean payoutTime = timeComponent.time % TIMER_TICKS == 0;

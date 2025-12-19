@@ -17,7 +17,7 @@
       "pro.fazeclan.river.stupid_express.StupidExpress"
     ],
     "cardinal-components": [
-      "pro.fazeclan.river.stupid_express.StupidExpressComponents"
+      "pro.fazeclan.river.stupid_express.SEComponents"
     ]
   },
   "custom": {
@@ -27,7 +27,8 @@
       "stupid_express:cooldown",
       "stupid_express:lovers",
       "stupid_express:necromancer",
-      "stupid_express:allergic"
+      "stupid_express:allergic",
+      "stupid_express:config"
     ]
   },
   "mixins": [

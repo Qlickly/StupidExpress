@@ -36,5 +36,7 @@
   "hud.allergic.hint": "Allergic",
   "hud.allergic.notification": "Your medical history highlights multiple %s-related allergies.",
   "death_reason.stupid_express.allergies": "mysterious allergies.",
-  "hud.allergic.doctor_heads_up": "Someone on the train may have allergic reactions- stay close!"
+  "hud.allergic.doctor_heads_up": "Someone on the train may have allergic reactions- stay close!",
+
+  "commands.stupid_express.set_config_value": "%s has been set to %s!"
 }
