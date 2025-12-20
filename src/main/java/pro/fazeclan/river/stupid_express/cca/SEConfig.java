@@ -20,13 +20,28 @@ public class SEConfig implements AutoSyncedComponent {
         SEConfig.KEY.sync(this.level);
     }
 
+    // Toggles whether or not necromancer has a shop
     @Getter
     @Setter
     private boolean necromancerHasShop = false;
 
+    /*
+     If an Arsonist is still alive when civilians or killers should have won, the game keeps going until the Arsonist
+     kills the rest, or the Arsonist is killed.
+     */
     @Getter
     @Setter
     private boolean arsonistKeepsGameGoing = false;
+
+    // If a Killer-Civilian combo happens, then lovers may win with killers.
+    @Getter
+    @Setter
+    private boolean loversWinWithKillers = false;
+
+    // If a Civilian-Civilian combo happens, then lovers may win with civilians.
+    @Getter
+    @Setter
+    private boolean loversWinWithCivilians = true;
 
     public SEConfig(Level level) {
         this.level = level;

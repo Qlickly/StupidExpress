@@ -9,10 +9,12 @@ import lombok.Getter;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.sounds.SoundSource;
 import org.agmas.harpymodloader.Harpymodloader;
+import org.agmas.harpymodloader.events.ResetPlayerEvent;
 import pro.fazeclan.river.stupid_express.modifier.allergic.cca.AllergicComponent;
 import pro.fazeclan.river.stupid_express.role.amnesiac.RoleSelectionHandler;
 import pro.fazeclan.river.stupid_express.role.arsonist.ArsonistItemGivingHandler;
 import pro.fazeclan.river.stupid_express.role.arsonist.OilDousingHandler;
+import pro.fazeclan.river.stupid_express.role.arsonist.cca.DousedPlayerComponent;
 import pro.fazeclan.river.stupid_express.role.avaricious.AvariciousGoldHandler;
 import pro.fazeclan.river.stupid_express.role.necromancer.RevivalSelectionHandler;
 
@@ -83,6 +85,12 @@ public class SERoles {
                 Harpymodloader.setRoleMaximum(NECROMANCER, 0);
                 Harpymodloader.setRoleMaximum(AVARICIOUS, 0);
             }
+        });
+
+        ResetPlayerEvent.EVENT.register(player -> {
+            var component = DousedPlayerComponent.KEY.get(player);
+            component.reset();
+            component.sync();
         });
 
         /// NECROMANCER

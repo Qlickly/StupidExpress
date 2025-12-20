@@ -12,6 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
+import org.agmas.harpymodloader.Harpymodloader;
 import org.agmas.harpymodloader.events.ModifierAssigned;
 import org.agmas.harpymodloader.events.ResetPlayerEvent;
 import org.agmas.harpymodloader.modifiers.HMLModifiers;
@@ -61,6 +62,9 @@ public class SEModifiers {
             }
             return true;
         }));
+
+        /// LOVERS
+        Harpymodloader.MODIFIER_MAX.put(StupidExpress.id("lovers"), 1);
 
     }
 
