@@ -34,6 +34,11 @@ public class ConfigCommand {
                                         .executes(ConfigCommand::loversWinKillersExecute)
                                 )
                         )
+                        .then(Commands.literal("lovers_know_immediately")
+                                .then(Commands.argument("value", BoolArgumentType.bool())
+                                        .executes(ConfigCommand::loversKnowImmediatelyExecute)
+                                )
+                        )
         );
     }
 
@@ -82,6 +87,18 @@ public class ConfigCommand {
         config.sync();
 
         source.sendSystemMessage(Component.translatable("commands.stupid_express.set_config_value", "lovers_win_with_killers", value));
+        return 1;
+    }
+
+    private static int loversKnowImmediatelyExecute(CommandContext<CommandSourceStack> ctx) {
+        var source = ctx.getSource();
+        var config = SEConfig.KEY.get(source.getLevel());
+        var value = ctx.getArgument("value", Boolean.class);
+
+        config.setLoversKnowImmediately(value);
+        config.sync();
+
+        source.sendSystemMessage(Component.translatable("commands.stupid_express.set_config_value", "lovers_know_immediately", value));
         return 1;
     }
 

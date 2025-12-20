@@ -1,5 +1,6 @@
 package pro.fazeclan.river.stupid_express.client.mixin.modifier.lovers;
 
+import dev.doctor4t.wathe.cca.GameWorldComponent;
 import dev.doctor4t.wathe.client.WatheClient;
 import dev.doctor4t.wathe.client.gui.RoleNameRenderer;
 import net.minecraft.client.DeltaTracker;
@@ -9,12 +10,15 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.PlayerFaceRenderer;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import pro.fazeclan.river.stupid_express.SEModifiers;
+import pro.fazeclan.river.stupid_express.cca.SEConfig;
 import pro.fazeclan.river.stupid_express.client.StupidExpressClient;
 import pro.fazeclan.river.stupid_express.modifier.lovers.cca.LoversComponent;
 
@@ -26,16 +30,40 @@ public abstract class LoversHudMixin {
 
     @Inject(method = "renderHud", at = @At("TAIL"))
     private static void loversHud(Font renderer, LocalPlayer player, GuiGraphics context, DeltaTracker tickCounter, CallbackInfo ci) {
+
+        var clientPlayer = Minecraft.getInstance().player;
+        var clientWorld = clientPlayer.level();
+
         var component = LoversComponent.KEY.get(player);
+        var config = SEConfig.KEY.get(clientWorld);
         if (component.isLover()
                 && !WatheClient.isPlayerSpectatingOrCreative()) {
             context.pose().pushPose();
 
-            if (Minecraft.getInstance().player.connection.getPlayerInfo(component.getLover()) == null) return;
+            var loverInfo = clientPlayer.connection.getPlayerInfo(component.getLover());
+            if (loverInfo == null) return;
 
-            Component name = Component.translatable("tip.lovers.partner", Minecraft.getInstance().player.connection.getPlayerInfo(component.getLover()).getProfile().getName());
-            PlayerFaceRenderer.draw(context,Minecraft.getInstance().player.connection.getPlayerInfo(component.getLover()).getSkin().texture(), 2, context.guiHeight()-14,12);
-            context.drawString(renderer, name, 18, context.guiHeight()-12, SEModifiers.LOVERS.color());
+            var textYPos = context.guiHeight() - 12;
+            var textXPos = 18;
+
+            Component name;
+            if (!config.isLoversKnowImmediately()) {
+                name = Component.translatable("hud.lovers.notification");
+                textXPos -= 14;
+            } else {
+                name = Component.translatable("tip.lovers.partner", loverInfo.getProfile().getName());
+            }
+
+            var role = GameWorldComponent.KEY.get(clientWorld).getRole(clientPlayer);
+            if (role != null) {
+                if (GameWorldComponent.KEY.get(clientWorld).getRole(clientPlayer).identifier().equals(ResourceLocation.parse("noellesroles:executioner"))) {
+                    textYPos -= 15;
+                }
+            }
+            if (config.isLoversKnowImmediately()) {
+                PlayerFaceRenderer.draw(context,loverInfo.getSkin().texture(), 2, textYPos - 2,12);
+            }
+            context.drawString(renderer, name, textXPos, textYPos, SEModifiers.LOVERS.color());
 
             context.pose().popPose();
         }
@@ -53,30 +81,39 @@ public abstract class LoversHudMixin {
         if (!component.isLover()) {
             return;
         }
-        var lover = Minecraft.getInstance().level.getPlayerByUUID(component.getLover());
+        var level = Minecraft.getInstance().level;
+        var lover = level.getPlayerByUUID(component.getLover());
         if (lover == null) {
             return;
         }
+        var config = SEConfig.KEY.get(level);
+        if (WatheClient.isPlayerAliveAndInSurvival() && !config.isLoversKnowImmediately()) {
+            stupidexpress$renderLoversHud(renderer, context, Component.translatable("hud.lovers.partner"));
+        }
         if (WatheClient.isPlayerSpectatingOrCreative()) {
-            context.pose().pushPose();
-            context.pose().translate(context.guiWidth() / 2.0f, context.guiHeight() / 2.0f - 35.0f, 0.0f);
-            context.pose().scale(0.6f, 0.6f, 1.0f);
-
-            Component name = Component.translatable(
+            stupidexpress$renderLoversHud(renderer, context, Component.translatable(
                     "hud.lovers.in_love",
                     lover.getName()
-            );
-
-            context.drawString(
-                    renderer,
-                    name,
-                    -renderer.width(name) / 2,
-                    32,
-                    SEModifiers.LOVERS.color() | (int) (nametagAlpha * 255.0F) << 24
-            );
-
-            context.pose().popPose();
+            ));
         }
+    }
+
+    @Unique
+    private static void stupidexpress$renderLoversHud(Font renderer, GuiGraphics context, Component component) {
+
+        context.pose().pushPose();
+        context.pose().translate(context.guiWidth() / 2.0f, context.guiHeight() / 2.0f - 35.0f, 0.0f);
+        context.pose().scale(0.6f, 0.6f, 1.0f);
+
+        context.drawString(
+                renderer,
+                component,
+                -renderer.width(component) / 2,
+                32,
+                SEModifiers.LOVERS.color() | (int) (nametagAlpha * 255.0F) << 24
+        );
+
+        context.pose().popPose();
     }
 
 }

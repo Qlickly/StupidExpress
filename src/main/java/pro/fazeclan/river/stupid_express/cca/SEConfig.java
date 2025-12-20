@@ -33,6 +33,11 @@ public class SEConfig implements AutoSyncedComponent {
     @Setter
     private boolean arsonistKeepsGameGoing = false;
 
+    // Lovers know who their partner is immediately
+    @Getter
+    @Setter
+    private boolean loversKnowImmediately = false;
+
     // If a Killer-Civilian combo happens, then lovers may win with killers.
     @Getter
     @Setter
@@ -53,6 +58,7 @@ public class SEConfig implements AutoSyncedComponent {
         this.arsonistKeepsGameGoing = tag.contains("arsonist_keep_alive") && tag.getBoolean("arsonist_keep_alive");
         this.loversWinWithCivilians = tag.contains("lovers_win_civilians") && tag.getBoolean("lovers_win_civilians");
         this.loversWinWithKillers = tag.contains("lovers_win_killers") && tag.getBoolean("lovers_win_killers");
+        this.loversKnowImmediately = tag.contains("lovers_know_immediately") && tag.getBoolean("lovers_know_immediately");
     }
 
     @Override
@@ -61,5 +67,6 @@ public class SEConfig implements AutoSyncedComponent {
         tag.putBoolean("arsonist_keep_alive", this.arsonistKeepsGameGoing);
         tag.putBoolean("lovers_win_civilians", this.loversWinWithCivilians);
         tag.putBoolean("lovers_win_killers", this.loversWinWithKillers);
+        tag.putBoolean("lovers_know_immediately", this.loversKnowImmediately);
     }
 }
