@@ -34,7 +34,7 @@ public abstract class LoversHudMixin {
         var clientPlayer = Minecraft.getInstance().player;
         var clientWorld = clientPlayer.level();
 
-        var component = LoversComponent.KEY.get(player);
+        var component = LoversComponent.KEY.get(clientPlayer);
         var config = SEConfig.KEY.get(clientWorld);
         if (component.isLover()
                 && !WatheClient.isPlayerSpectatingOrCreative()) {
