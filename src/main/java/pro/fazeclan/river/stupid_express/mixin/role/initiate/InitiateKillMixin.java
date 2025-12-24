@@ -39,7 +39,6 @@ public abstract class InitiateKillMixin {
         var level = (ServerLevel) victim.level();
         var gameWorldComponent = GameWorldComponent.KEY.get(level);
 
-        if (killer != null)
         if (!gameWorldComponent.isRole(victim, SERoles.INITIATE)) {
             return;
         }
@@ -52,8 +51,6 @@ public abstract class InitiateKillMixin {
             var role = shuffledKillerRoles.getFirst();
             gameWorldComponent.addRole(killer, role);
             ModdedRoleAssigned.EVENT.invoker().assignModdedRole(killer, role);
-            var playerShopComponent = PlayerShopComponent.KEY.get(killer);
-            playerShopComponent.setBalance(100);
             if (Harpymodloader.VANNILA_ROLES.contains(role)) {
                 ServerPlayNetworking.send((ServerPlayer) killer, new AnnounceWelcomePayload(RoleAnnouncementTexts.ROLE_ANNOUNCEMENT_TEXTS.indexOf(WatheRoles.KILLER), gameWorldComponent.getAllKillerTeamPlayers().size(), 0));
             } else {

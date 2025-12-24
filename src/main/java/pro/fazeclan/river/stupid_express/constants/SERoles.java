@@ -79,7 +79,7 @@ public class SERoles {
     ));
 
     public static List<ShopEntry> INITIATE_SHOP = Util.make(new ArrayList<>(), entries -> {
-        entries.add(new BuyableShopEntry(WatheItems.KNIFE.getDefaultInstance(), 100, ShopEntry.Type.WEAPON));
+        entries.add(new BuyableShopEntry(WatheItems.KNIFE.getDefaultInstance(), 200, ShopEntry.Type.WEAPON));
     });
 
     public static void init() {
@@ -128,8 +128,6 @@ public class SERoles {
         /// AVARICIOUS
 
         AvariciousGoldHandler.onGameStart();
-
-        /// INITIATE
 
     }
 
