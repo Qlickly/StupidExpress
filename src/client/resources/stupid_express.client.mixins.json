@@ -11,10 +11,11 @@
     "role.arsonist.ArsonistHudMixin",
     "role.arsonist.ArsonistInstinctMixin",
     "role.initiate.InitiateCoinMixin",
+    "role.initiate.InitiateInstinctMixin",
     "role.initiate.InitiateShopMixin",
     "role.necromancer.NecromancerHudMixin",
     "role.necromancer.NecromancerNoShopMixin",
-    "role.initiate.InitiateInstinctMixin"
+    "role.amnesiac.AmnesiacInstinctGlowMixin"
   ],
   "injectors": {
     "defaultRequire": 1

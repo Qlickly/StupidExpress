@@ -1,4 +1,4 @@
-package pro.fazeclan.river.stupid_express.client.mixin.role.initiate;
+package pro.fazeclan.river.stupid_express.client.mixin.role.amnesiac;
 
 import dev.doctor4t.wathe.cca.GameWorldComponent;
 import dev.doctor4t.wathe.client.WatheClient;
@@ -11,37 +11,18 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import pro.fazeclan.river.stupid_express.constants.SERoles;
 
-import java.awt.*;
-
 @Mixin(WatheClient.class)
-public class InitiateInstinctMixin {
+public class AmnesiacInstinctGlowMixin {
 
-    @Inject(
-            method = "getInstinctHighlight",
-            at = @At("HEAD"),
-            cancellable = true
-    )
-    private static void initiateHighlightColor(
-            Entity target,
-            CallbackInfoReturnable<Integer> cir
-    ) {
-        var gameWorldComponent = GameWorldComponent.KEY.get(Minecraft.getInstance().player.level());
-        if (target instanceof Player targettedPlayer) {
-            if (gameWorldComponent.isRole(targettedPlayer, SERoles.INITIATE) && gameWorldComponent.isRole(Minecraft.getInstance().player, SERoles.INITIATE)) {
-                cir.setReturnValue(SERoles.INITIATE.color());
-                cir.cancel();
-            }
-        }
-    }
-
+    // i'm thinking the amnesiac could potentially be useful for killers if they can coerce them to pick up a killer's body
     @Inject(method = "getInstinctHighlight", at = @At("HEAD"), cancellable = true)
-    private static void initiateHighlightToKillers(Entity target, CallbackInfoReturnable<Integer> cir) {
+    private static void amnesiacHighlightToKillers(Entity target, CallbackInfoReturnable<Integer> cir) {
         var player = Minecraft.getInstance().player;
         GameWorldComponent gameWorldComponent = GameWorldComponent.KEY.get(player.level());
         if (!(target instanceof Player targettedPlayer)) {
             return;
         }
-        if (!gameWorldComponent.isRole(targettedPlayer, SERoles.INITIATE)) {
+        if (!gameWorldComponent.isRole(targettedPlayer, SERoles.AMNESIAC)) {
             return;
         }
         if (WatheClient.isPlayerSpectatingOrCreative()) {
@@ -50,7 +31,7 @@ public class InitiateInstinctMixin {
         if (!WatheClient.isInstinctEnabled()) {
             return;
         }
-        cir.setReturnValue(SERoles.INITIATE.color());
+        cir.setReturnValue(SERoles.AMNESIAC.color());
     }
 
 }
