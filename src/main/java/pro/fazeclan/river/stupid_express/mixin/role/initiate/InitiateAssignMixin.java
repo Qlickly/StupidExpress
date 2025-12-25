@@ -43,7 +43,7 @@ public class InitiateAssignMixin {
                     && !gameWorldComponent.canUseKillerFeatures(player)
                     && !gameWorldComponent.isRole(player, SERoles.INITIATE)) {
                 gameWorldComponent.addRole(player, SERoles.INITIATE);
-                Log.info(LogCategory.GENERAL, player.getScoreboardName() + " had been reassigned to " + SERoles.INITIATE.identifier().toString());
+                Log.info(LogCategory.GENERAL, player.getScoreboardName() + " -> " + SERoles.INITIATE.identifier().toString());
                 break;
             }
         }

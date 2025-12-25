@@ -31,7 +31,7 @@ public class SERoles {
     public static Role AMNESIAC = registerRole(new Role(
             StupidExpress.id("amnesiac"),
             0x9baae8,
-            true,
+            false,
             false,
             Role.MoodType.REAL,
             WatheRoles.CIVILIAN.getMaxSprintTime(),

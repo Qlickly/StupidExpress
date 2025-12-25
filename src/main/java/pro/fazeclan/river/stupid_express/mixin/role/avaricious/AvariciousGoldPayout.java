@@ -51,7 +51,6 @@ public class AvariciousGoldPayout {
 
             if (nearbyPlayers > 0) {
                 PlayerShopComponent.KEY.get(player).addToBalance(nearbyPlayers * AvariciousGoldHandler.PAYOUT_PER_PLAYER);
-                // TODO: Isn't working currently, fix sound cue.
                 player.playNotifySound(WatheSounds.UI_SHOP_BUY, SoundSource.PLAYERS, 10.0f, 0.5f);
             }
         }
