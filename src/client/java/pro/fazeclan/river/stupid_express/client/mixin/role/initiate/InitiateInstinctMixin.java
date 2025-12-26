@@ -13,7 +13,7 @@ import pro.fazeclan.river.stupid_express.constants.SERoles;
 
 import java.awt.*;
 
-@Mixin(WatheClient.class)
+@Mixin(value = WatheClient.class, priority = 500)
 public class InitiateInstinctMixin {
 
     @Inject(
@@ -51,6 +51,7 @@ public class InitiateInstinctMixin {
             return;
         }
         cir.setReturnValue(SERoles.INITIATE.color());
+        cir.cancel();
     }
 
 }

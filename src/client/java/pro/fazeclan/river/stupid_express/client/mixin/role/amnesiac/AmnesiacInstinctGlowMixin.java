@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import pro.fazeclan.river.stupid_express.constants.SERoles;
 
-@Mixin(WatheClient.class)
+@Mixin(value = WatheClient.class, priority = 500)
 public class AmnesiacInstinctGlowMixin {
 
     // i'm thinking the amnesiac could potentially be useful for killers if they can coerce them to pick up a killer's body
